@@ -12,8 +12,8 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
             min-height: 100vh;
@@ -22,6 +22,7 @@
             align-items: center;
             padding: 20px;
             overflow: hidden;
+            position: relative;
         }
 
         @keyframes gradient {
@@ -30,62 +31,143 @@
             100% { background-position: 0% 50%; }
         }
 
-        .stars {
+        /* Particle Background */
+        .particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
+            z-index: 1;
         }
 
-        .star {
+        .particle {
             position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        .floating-heart {
-            position: fixed;
             pointer-events: none;
-            font-size: 2rem;
-            animation: float-up 6s ease-in forwards;
+            opacity: 0.5;
         }
 
-        @keyframes float-up {
-            0% {
-                opacity: 1;
-                transform: translateY(0) translateX(0) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-100vh) translateX(100px) scale(0);
-            }
+        .circle {
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
         }
 
+        /* Container */
         .container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 600px;
+            max-width: 700px;
             width: 100%;
-            padding: 40px;
-            animation: slideInUp 0.8s ease-out;
             position: relative;
             z-index: 10;
-            backdrop-filter: blur(10px);
+            animation: fadeInScale 1s ease-out;
         }
 
-        @keyframes slideInUp {
+        @keyframes fadeInScale {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 107, 107, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 4s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translate(-100%, -100%) rotate(45deg); }
+            100% { transform: translate(100%, 100%) rotate(45deg); }
+        }
+
+        /* Floating Background Elements */
+        .floating-element {
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .float-1 { top: 10%; left: 5%; animation: float 6s ease-in-out infinite; }
+        .float-2 { top: 70%; right: 10%; animation: float 8s ease-in-out infinite 1s; }
+        .float-3 { bottom: 20%; left: 20%; animation: float 7s ease-in-out infinite 2s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Content */
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hearts-animation {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .heart-beat {
+            animation: heartPulse 1.3s ease-in-out infinite;
+            display: inline-block;
+            filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.6));
+        }
+
+        .heart-beat:nth-child(1) { animation-delay: 0s; }
+        .heart-beat:nth-child(2) { animation-delay: 0.2s; }
+        .heart-beat:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.3); }
+            50% { transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #e73c7e, #ee7752);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            font-weight: 800;
+            animation: slideInDown 0.8s ease-out;
+            letter-spacing: -1px;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
             }
             to {
                 opacity: 1;
@@ -93,40 +175,85 @@
             }
         }
 
-        .header {
-            text-align: center;
+        .subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            font-style: italic;
+            animation: fadeIn 0.8s ease-out 0.3s both;
             margin-bottom: 30px;
         }
 
-        .hearts-container {
-            font-size: 3em;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        .heart {
-            animation: heartBeat 1.2s ease-in-out infinite;
-            display: inline-block;
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #e73c7e, transparent);
+            margin: 30px 0;
+            animation: expandWidth 0.8s ease-out 0.5s both;
         }
 
-        .heart:nth-child(1) { animation-delay: 0s; }
-        .heart:nth-child(2) { animation-delay: 0.2s; }
-        .heart:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes heartBeat {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.2); }
-            50% { transform: scale(1); }
+        @keyframes expandWidth {
+            from { width: 0; }
+            to { width: 100%; }
         }
 
-        h1 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            animation: slideInLeft 0.8s ease-out 0.2s both;
-            text-shadow: 2px 2px 4px rgba(102, 126, 234, 0.2);
+        /* Main Message */
+        .love-message {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: white;
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, #e73c7e, #ee7752, #f38181);
+            border-radius: 20px;
+            animation: slideInUp 0.8s ease-out 0.7s both;
+            box-shadow: 0 10px 30px rgba(231, 60, 126, 0.4);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .love-message::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmerFast 2s infinite;
+        }
+
+        @keyframes shimmerFast {
+            0% { transform: translate(-100%, -100%) rotate(45deg); }
+            100% { transform: translate(100%, 100%) rotate(45deg); }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Letter Content */
+        .letter-section {
+            background: linear-gradient(135deg, rgba(247, 248, 250, 1), rgba(255, 240, 245, 1));
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            animation: slideInLeft 0.8s ease-out 0.9s both;
+            border-left: 5px solid #e73c7e;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
         @keyframes slideInLeft {
@@ -140,12 +267,44 @@
             }
         }
 
-        .subtitle {
-            color: #764ba2;
-            font-size: 1.2em;
-            font-style: italic;
-            animation: slideInRight 0.8s ease-out 0.4s both;
+        .greeting {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 700;
         }
+
+        .letter-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #555;
+            margin: 15px 0;
+        }
+
+        /* Features List */
+        .features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 15px;
+            animation: slideInRight 0.6s ease-out both;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-item:nth-child(1) { animation-delay: 1.1s; }
+        .feature-item:nth-child(2) { animation-delay: 1.2s; }
+        .feature-item:nth-child(3) { animation-delay: 1.3s; }
+        .feature-item:nth-child(4) { animation-delay: 1.4s; }
+        .feature-item:nth-child(5) { animation-delay: 1.5s; }
 
         @keyframes slideInRight {
             from {
@@ -158,298 +317,234 @@
             }
         }
 
-        .letter {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            border-left: 5px solid #667eea;
-            animation: fadeInScale 0.8s ease-out 0.6s both;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .letter::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translate(-100%, -100%) rotate(45deg); }
-            100% { transform: translate(100%, 100%) rotate(45deg); }
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .letter-greeting {
-            font-size: 1.3em;
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: bold;
-            animation: typewriter 1s steps(20) 0.8s;
-            position: relative;
-            z-index: 1;
-        }
-
-        @keyframes typewriter {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        .letter-content {
-            font-size: 1.1em;
-            line-height: 1.8;
-            color: #555;
-            margin-bottom: 20px;
-            animation: fadeIn 0.8s ease-out 1s both;
-            position: relative;
-            z-index: 1;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .love-message {
-            font-size: 2em;
-            font-weight: bold;
-            color: #e74c3c;
-            text-align: center;
-            margin: 30px 0;
-            animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.2s both;
-            letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
-        }
-
-        @keyframes popIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.3) rotate(-10deg);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) rotate(0);
-            }
-        }
-
-        .emoji-list {
-            position: relative;
-            z-index: 1;
-            animation: fadeIn 0.8s ease-out 1.4s both;
-        }
-
-        .emoji-item {
-            display: flex;
-            align-items: center;
-            margin: 10px 0;
-            animation: slideInLeft 0.5s ease-out both;
-        }
-
-        .emoji-item:nth-child(1) { animation-delay: 1.5s; }
-        .emoji-item:nth-child(2) { animation-delay: 1.6s; }
-        .emoji-item:nth-child(3) { animation-delay: 1.7s; }
-        .emoji-item:nth-child(4) { animation-delay: 1.8s; }
-        .emoji-item:nth-child(5) { animation-delay: 1.9s; }
-
-        .emoji-icon {
-            font-size: 1.5em;
-            margin-right: 10px;
+        .feature-emoji {
+            font-size: 2rem;
             animation: bounce 2s ease-in-out infinite;
+            flex-shrink: 0;
         }
 
-        .emoji-item:nth-child(1) .emoji-icon { animation-delay: 0s; }
-        .emoji-item:nth-child(2) .emoji-icon { animation-delay: 0.2s; }
-        .emoji-item:nth-child(3) .emoji-icon { animation-delay: 0.4s; }
-        .emoji-item:nth-child(4) .emoji-icon { animation-delay: 0.6s; }
-        .emoji-item:nth-child(5) .emoji-icon { animation-delay: 0.8s; }
+        .feature-item:nth-child(1) .feature-emoji { animation-delay: 0s; }
+        .feature-item:nth-child(2) .feature-emoji { animation-delay: 0.2s; }
+        .feature-item:nth-child(3) .feature-emoji { animation-delay: 0.4s; }
+        .feature-item:nth-child(4) .feature-emoji { animation-delay: 0.6s; }
+        .feature-item:nth-child(5) .feature-emoji { animation-delay: 0.8s; }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
 
+        .feature-text {
+            font-size: 1.05rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        /* Signature */
         .signature {
             text-align: right;
-            margin-top: 25px;
+            margin-top: 30px;
             font-style: italic;
-            color: #764ba2;
-            font-size: 1.1em;
-            animation: fadeIn 0.8s ease-out 2s both;
-            position: relative;
-            z-index: 1;
+            color: #e73c7e;
+            font-size: 1.2rem;
+            font-weight: 600;
+            animation: fadeIn 0.8s ease-out 1.7s both;
+        }
+
+        /* Decorative Bottom */
+        .decoration {
+            text-align: center;
+            font-size: 2rem;
+            margin: 30px 0;
+            letter-spacing: 20px;
+            animation: fadeIn 0.8s ease-out 1.9s both;
+        }
+
+        .deco-item {
+            display: inline-block;
+            animation: spin 3s linear infinite;
+        }
+
+        .deco-item:nth-child(1) { animation-delay: 0s; }
+        .deco-item:nth-child(2) { animation-delay: 0.5s; }
+        .deco-item:nth-child(3) { animation-delay: 1s; }
+        .deco-item:nth-child(4) { animation-delay: 1.5s; }
+        .deco-item:nth-child(5) { animation-delay: 2s; }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
         }
 
         .footer {
             text-align: center;
-            color: #999;
-            font-size: 0.9em;
             margin-top: 30px;
-            padding-top: 20px;
-            border-top: 2px solid #eee;
-            animation: fadeIn 0.8s ease-out 2.2s both;
-            position: relative;
-            z-index: 1;
+            color: #999;
+            font-size: 1rem;
+            animation: fadeIn 0.8s ease-out 2.1s both;
         }
 
-        .emoji-decoration {
-            text-align: center;
-            font-size: 1.5em;
-            margin: 20px 0;
-            letter-spacing: 10px;
-            animation: fadeIn 0.8s ease-out 1.3s both;
-            position: relative;
-            z-index: 1;
+        /* Floating Hearts Background */
+        .floating-heart {
+            position: fixed;
+            pointer-events: none;
+            font-size: 2rem;
+            animation: float-up 6s ease-in forwards;
+            z-index: 0;
         }
 
-        .decoration-emoji {
-            display: inline-block;
-            animation: rotate 4s linear infinite;
-        }
-
-        .decoration-emoji:nth-child(1) { animation-delay: 0s; }
-        .decoration-emoji:nth-child(2) { animation-delay: 0.5s; }
-        .decoration-emoji:nth-child(3) { animation-delay: 1s; }
-        .decoration-emoji:nth-child(4) { animation-delay: 1.5s; }
-        .decoration-emoji:nth-child(5) { animation-delay: 2s; }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg) translateX(0); }
-            50% { transform: rotate(180deg) translateX(5px); }
-            100% { transform: rotate(360deg) translateX(0); }
+        @keyframes float-up {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) translateX(100px) scale(0);
+            }
         }
 
         @media (max-width: 600px) {
-            .container {
-                padding: 25px;
+            .card {
+                padding: 30px;
             }
 
             h1 {
-                font-size: 2em;
+                font-size: 2.5rem;
             }
 
             .love-message {
-                font-size: 1.5em;
+                font-size: 2rem;
+                padding: 20px;
             }
 
-            .letter-content {
-                font-size: 1em;
+            .hearts-animation {
+                font-size: 2.5rem;
             }
 
-            .hearts-container {
-                font-size: 2.5em;
+            .letter-section {
+                padding: 20px;
+            }
+
+            .feature-emoji {
+                font-size: 1.5rem;
+            }
+
+            .feature-text {
+                font-size: 0.95rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="stars" id="stars-container"></div>
+    <div class="particles" id="particles"></div>
 
     <div class="container">
-        <div class="header">
-            <div class="hearts-container">
-                <span class="heart">💕</span>
-                <span class="heart">💕</span>
-                <span class="heart">💕</span>
-            </div>
-            <h1>For You, Salsabila</h1>
-            <p class="subtitle">A little something from your Muhammad 🥰</p>
-        </div>
+        <div class="card">
+            <!-- Floating Background Elements -->
+            <div class="floating-element float-1">💕</div>
+            <div class="floating-element float-2">✨</div>
+            <div class="floating-element float-3">🌹</div>
 
-        <div class="letter">
-            <div class="letter-greeting">Hey Beautiful! 🌹</div>
-            
-            <div class="letter-content">
-                I'm not the best at expressing my feelings with words (you know how I am 😅), but I had to tell you something that's been on my mind...
-            </div>
-
-            <div class="love-message">
-                I LOVE U SO MUCH BEBEEE!! 💖
-            </div>
-
-            <div class="letter-content">
-                No seriously though, you make my heart skip a beat every single time I see you. You're:
-            </div>
-
-            <div class="emoji-list">
-                <div class="emoji-item">
-                    <span class="emoji-icon">✨</span>
-                    <span>My favorite notification</span>
+            <!-- Content -->
+            <div class="content">
+                <!-- Header -->
+                <div class="header">
+                    <div class="hearts-animation">
+                        <span class="heart-beat">💕</span>
+                        <span class="heart-beat">💕</span>
+                        <span class="heart-beat">💕</span>
+                    </div>
+                    <h1>For You, Salsabila</h1>
+                    <p class="subtitle">A little something from your Muhammad 🥰</p>
                 </div>
-                <div class="emoji-item">
-                    <span class="emoji-icon">🌙</span>
-                    <span>The reason I smile at my phone like a crazy person</span>
+
+                <div class="divider"></div>
+
+                <!-- Main Love Message -->
+                <div class="love-message">
+                    I LOVE U SO MUCH BEBEEE!! 💖
                 </div>
-                <div class="emoji-item">
-                    <span class="emoji-icon">🎵</span>
-                    <span>My favorite song on repeat</span>
+
+                <!-- Letter Section -->
+                <div class="letter-section">
+                    <div class="greeting">Hey Beautiful! 🌹</div>
+                    <p class="letter-text">
+                        I'm not the best at expressing my feelings with words (you know how I am 😅), but I had to tell you something that's been on my mind...
+                    </p>
+                    <p class="letter-text">
+                        No seriously though, you make my heart skip a beat every single time I see you. You're:
+                    </p>
+
+                    <!-- Features List -->
+                    <div class="features">
+                        <div class="feature-item">
+                            <span class="feature-emoji">✨</span>
+                            <span class="feature-text">My favorite notification</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-emoji">🌙</span>
+                            <span class="feature-text">The reason I smile at my phone like a crazy person</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-emoji">🎵</span>
+                            <span class="feature-text">My favorite song on repeat</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-emoji">🌟</span>
+                            <span class="feature-text">The person who makes ordinary days feel like adventures</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-emoji">💫</span>
+                            <span class="feature-text">My whole world, honestly</span>
+                        </div>
+                    </div>
+
+                    <p class="letter-text">
+                        Whether you're being goofy, serious, or just being yourself, I can't help but fall for you all over again. You're stuck with me now, sorry! 😄❤️
+                        <br><br>
+                        Thank you for being MY person. I'm so lucky to have you.
+                    </p>
+
+                    <!-- Signature -->
+                    <div class="signature">
+                        Forever yours,<br>
+                        Muhammad Sakhowi Al Wahidi 💕
+                    </div>
                 </div>
-                <div class="emoji-item">
-                    <span class="emoji-icon">🌟</span>
-                    <span>The person who makes ordinary days feel like adventures</span>
+
+                <!-- Decoration -->
+                <div class="decoration">
+                    <span class="deco-item">💗</span>
+                    <span class="deco-item">🌹</span>
+                    <span class="deco-item">💗</span>
+                    <span class="deco-item">🌹</span>
+                    <span class="deco-item">💗</span>
                 </div>
-                <div class="emoji-item">
-                    <span class="emoji-icon">💫</span>
-                    <span>My whole world, honestly</span>
+
+                <!-- Footer -->
+                <div class="footer">
+                    <p>Scanned with love 💌</p>
                 </div>
             </div>
-
-            <div class="letter-content" style="margin-top: 20px;">
-                Whether you're being goofy, serious, or just being yourself, I can't help but fall for you all over again. You're stuck with me now, sorry! 😄❤️
-                <br><br>
-                Thank you for being MY person. I'm so lucky to have you.
-            </div>
-
-            <div class="emoji-decoration">
-                <span class="decoration-emoji">💗</span>
-                <span class="decoration-emoji">🌹</span>
-                <span class="decoration-emoji">💗</span>
-                <span class="decoration-emoji">🌹</span>
-                <span class="decoration-emoji">💗</span>
-            </div>
-
-            <div class="signature">
-                Forever yours,<br>
-                Muhammad Sakhowi Al Wahidi 💕
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>Scanned with love 💌</p>
         </div>
     </div>
 
     <script>
-        // Create twinkling stars
-        function createStars() {
-            const starsContainer = document.getElementById('stars-container');
-            for (let i = 0; i < 50; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.width = Math.random() * 2 + 1 + 'px';
-                star.style.height = star.style.width;
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                starsContainer.appendChild(star);
+        // Create particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle circle';
+                particle.style.width = Math.random() * 50 + 20 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animation = `float ${4 + Math.random() * 4}s ease-in-out infinite`;
+                particle.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(particle);
             }
         }
 
@@ -460,17 +555,17 @@
             heart.textContent = ['💕', '💖', '💗', '💓'][Math.floor(Math.random() * 4)];
             heart.style.left = Math.random() * 100 + '%';
             heart.style.top = '100%';
-            heart.style.animationDuration = (4 + Math.random() * 3) + 's';
+            heart.style.animationDuration = (5 + Math.random() * 3) + 's';
             document.body.appendChild(heart);
 
-            setTimeout(() => heart.remove(), 7000);
+            setTimeout(() => heart.remove(), 8000);
         }
 
         // Initialize
-        createStars();
+        createParticles();
 
         // Create floating hearts periodically
-        setInterval(createFloatingHeart, 600);
+        setInterval(createFloatingHeart, 700);
 
         // Trigger initial hearts
         for (let i = 0; i < 5; i++) {
