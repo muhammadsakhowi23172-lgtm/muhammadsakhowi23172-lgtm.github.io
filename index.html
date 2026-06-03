@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 For You, Salsabila 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hearts {
+            font-size: 3em;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px rgba(102, 126, 234, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(102, 126, 234, 0.8); }
+        }
+
+        .subtitle {
+            color: #764ba2;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+
+        .letter {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .letter-greeting {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .letter-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .love-message {
+            font-size: 2em;
+            font-weight: bold;
+            color: #e74c3c;
+            text-align: center;
+            margin: 30px 0;
+            animation: pulse 1.5s ease-in-out infinite;
+            letter-spacing: 2px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 25px;
+            font-style: italic;
+            color: #764ba2;
+            font-size: 1.1em;
+        }
+
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+
+        .emoji-decoration {
+            text-align: center;
+            font-size: 1.5em;
+            margin: 20px 0;
+            letter-spacing: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 1em;
+            transition: transform 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .love-message {
+                font-size: 1.5em;
+            }
+
+            .letter-content {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="hearts">💕💕💕</div>
+            <h1>For You, Salsabila</h1>
+            <p class="subtitle">A little something from your Muhammad 🥰</p>
+        </div>
+
+        <div class="letter">
+            <div class="letter-greeting">Hey Beautiful! 🌹</div>
+            
+            <div class="letter-content">
+                I'm not the best at expressing my feelings with words (you know how I am 😅), but I had to tell you something that's been on my mind...
+            </div>
+
+            <div class="love-message">
+                I LOVE U SO MUCH BEBEEE!! 💖
+            </div>
+
+            <div class="letter-content">
+                No seriously though, you make my heart skip a beat every single time I see you. You're:
+                <br><br>
+                ✨ My favorite notification<br>
+                🌙 The reason I smile at my phone like a crazy person<br>
+                🎵 My favorite song on repeat<br>
+                🌟 The person who makes ordinary days feel like adventures<br>
+                💫 My whole world, honestly<br>
+                <br>
+                Whether you're being goofy, serious, or just being yourself, I can't help but fall for you all over again. You're stuck with me now, sorry! 😄❤️
+                <br><br>
+                Thank you for being MY person. I'm so lucky to have you.
+            </div>
+
+            <div class="emoji-decoration">💗 🌹 💗 🌹 💗</div>
+
+            <div class="signature">
+                Forever yours,<br>
+                Muhammad Sakhowi Al Wahidi 💕
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Scanned with love 💌</p>
+        </div>
+    </div>
+</body>
+</html>
