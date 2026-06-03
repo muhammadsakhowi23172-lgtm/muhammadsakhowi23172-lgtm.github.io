@@ -13,29 +13,79 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            overflow-x: hidden;
+            overflow: hidden;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .floating-heart {
+            position: fixed;
+            pointer-events: none;
+            font-size: 2rem;
+            animation: float-up 6s ease-in forwards;
+        }
+
+        @keyframes float-up {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) translateX(100px) scale(0);
+            }
         }
 
         .container {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             max-width: 600px;
             width: 100%;
             padding: 40px;
-            animation: slideIn 0.8s ease-out;
+            animation: slideInUp 0.8s ease-out;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(10px);
         }
 
-        @keyframes slideIn {
+        @keyframes slideInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
@@ -48,33 +98,64 @@
             margin-bottom: 30px;
         }
 
-        .hearts {
+        .hearts-container {
             font-size: 3em;
             margin-bottom: 15px;
-            animation: float 3s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        .heart {
+            animation: heartBeat 1.2s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        .heart:nth-child(1) { animation-delay: 0s; }
+        .heart:nth-child(2) { animation-delay: 0.2s; }
+        .heart:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
         }
 
         h1 {
             color: #667eea;
             font-size: 2.5em;
             margin-bottom: 10px;
-            animation: glow 2s ease-in-out infinite;
+            animation: slideInLeft 0.8s ease-out 0.2s both;
+            text-shadow: 2px 2px 4px rgba(102, 126, 234, 0.2);
         }
 
-        @keyframes glow {
-            0%, 100% { text-shadow: 0 0 10px rgba(102, 126, 234, 0.5); }
-            50% { text-shadow: 0 0 20px rgba(102, 126, 234, 0.8); }
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .subtitle {
             color: #764ba2;
             font-size: 1.2em;
             font-style: italic;
+            animation: slideInRight 0.8s ease-out 0.4s both;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         .letter {
@@ -83,6 +164,36 @@
             border-radius: 15px;
             margin-bottom: 30px;
             border-left: 5px solid #667eea;
+            animation: fadeInScale 0.8s ease-out 0.6s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translate(-100%, -100%) rotate(45deg); }
+            100% { transform: translate(100%, 100%) rotate(45deg); }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .letter-greeting {
@@ -90,6 +201,14 @@
             color: #333;
             margin-bottom: 20px;
             font-weight: bold;
+            animation: typewriter 1s steps(20) 0.8s;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
         }
 
         .letter-content {
@@ -97,6 +216,14 @@
             line-height: 1.8;
             color: #555;
             margin-bottom: 20px;
+            animation: fadeIn 0.8s ease-out 1s both;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .love-message {
@@ -105,13 +232,59 @@
             color: #e74c3c;
             text-align: center;
             margin: 30px 0;
-            animation: pulse 1.5s ease-in-out infinite;
+            animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.2s both;
             letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(231, 76, 60, 0.5);
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(-10deg);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0);
+            }
+        }
+
+        .emoji-list {
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 0.8s ease-out 1.4s both;
+        }
+
+        .emoji-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            animation: slideInLeft 0.5s ease-out both;
+        }
+
+        .emoji-item:nth-child(1) { animation-delay: 1.5s; }
+        .emoji-item:nth-child(2) { animation-delay: 1.6s; }
+        .emoji-item:nth-child(3) { animation-delay: 1.7s; }
+        .emoji-item:nth-child(4) { animation-delay: 1.8s; }
+        .emoji-item:nth-child(5) { animation-delay: 1.9s; }
+
+        .emoji-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .emoji-item:nth-child(1) .emoji-icon { animation-delay: 0s; }
+        .emoji-item:nth-child(2) .emoji-icon { animation-delay: 0.2s; }
+        .emoji-item:nth-child(3) .emoji-icon { animation-delay: 0.4s; }
+        .emoji-item:nth-child(4) .emoji-icon { animation-delay: 0.6s; }
+        .emoji-item:nth-child(5) .emoji-icon { animation-delay: 0.8s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .signature {
@@ -120,6 +293,9 @@
             font-style: italic;
             color: #764ba2;
             font-size: 1.1em;
+            animation: fadeIn 0.8s ease-out 2s both;
+            position: relative;
+            z-index: 1;
         }
 
         .footer {
@@ -129,6 +305,9 @@
             margin-top: 30px;
             padding-top: 20px;
             border-top: 2px solid #eee;
+            animation: fadeIn 0.8s ease-out 2.2s both;
+            position: relative;
+            z-index: 1;
         }
 
         .emoji-decoration {
@@ -136,26 +315,26 @@
             font-size: 1.5em;
             margin: 20px 0;
             letter-spacing: 10px;
+            animation: fadeIn 0.8s ease-out 1.3s both;
+            position: relative;
+            z-index: 1;
         }
 
-        .button {
+        .decoration-emoji {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 25px;
-            text-decoration: none;
-            margin-top: 20px;
-            width: 100%;
-            text-align: center;
-            font-size: 1em;
-            transition: transform 0.3s ease;
-            border: none;
-            cursor: pointer;
+            animation: rotate 4s linear infinite;
         }
 
-        .button:hover {
-            transform: scale(1.05);
+        .decoration-emoji:nth-child(1) { animation-delay: 0s; }
+        .decoration-emoji:nth-child(2) { animation-delay: 0.5s; }
+        .decoration-emoji:nth-child(3) { animation-delay: 1s; }
+        .decoration-emoji:nth-child(4) { animation-delay: 1.5s; }
+        .decoration-emoji:nth-child(5) { animation-delay: 2s; }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg) translateX(0); }
+            50% { transform: rotate(180deg) translateX(5px); }
+            100% { transform: rotate(360deg) translateX(0); }
         }
 
         @media (max-width: 600px) {
@@ -174,13 +353,23 @@
             .letter-content {
                 font-size: 1em;
             }
+
+            .hearts-container {
+                font-size: 2.5em;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="stars" id="stars-container"></div>
+
     <div class="container">
         <div class="header">
-            <div class="hearts">💕💕💕</div>
+            <div class="hearts-container">
+                <span class="heart">💕</span>
+                <span class="heart">💕</span>
+                <span class="heart">💕</span>
+            </div>
             <h1>For You, Salsabila</h1>
             <p class="subtitle">A little something from your Muhammad 🥰</p>
         </div>
@@ -198,19 +387,44 @@
 
             <div class="letter-content">
                 No seriously though, you make my heart skip a beat every single time I see you. You're:
-                <br><br>
-                ✨ My favorite notification<br>
-                🌙 The reason I smile at my phone like a crazy person<br>
-                🎵 My favorite song on repeat<br>
-                🌟 The person who makes ordinary days feel like adventures<br>
-                💫 My whole world, honestly<br>
-                <br>
+            </div>
+
+            <div class="emoji-list">
+                <div class="emoji-item">
+                    <span class="emoji-icon">✨</span>
+                    <span>My favorite notification</span>
+                </div>
+                <div class="emoji-item">
+                    <span class="emoji-icon">🌙</span>
+                    <span>The reason I smile at my phone like a crazy person</span>
+                </div>
+                <div class="emoji-item">
+                    <span class="emoji-icon">🎵</span>
+                    <span>My favorite song on repeat</span>
+                </div>
+                <div class="emoji-item">
+                    <span class="emoji-icon">🌟</span>
+                    <span>The person who makes ordinary days feel like adventures</span>
+                </div>
+                <div class="emoji-item">
+                    <span class="emoji-icon">💫</span>
+                    <span>My whole world, honestly</span>
+                </div>
+            </div>
+
+            <div class="letter-content" style="margin-top: 20px;">
                 Whether you're being goofy, serious, or just being yourself, I can't help but fall for you all over again. You're stuck with me now, sorry! 😄❤️
                 <br><br>
                 Thank you for being MY person. I'm so lucky to have you.
             </div>
 
-            <div class="emoji-decoration">💗 🌹 💗 🌹 💗</div>
+            <div class="emoji-decoration">
+                <span class="decoration-emoji">💗</span>
+                <span class="decoration-emoji">🌹</span>
+                <span class="decoration-emoji">💗</span>
+                <span class="decoration-emoji">🌹</span>
+                <span class="decoration-emoji">💗</span>
+            </div>
 
             <div class="signature">
                 Forever yours,<br>
@@ -222,5 +436,46 @@
             <p>Scanned with love 💌</p>
         </div>
     </div>
+
+    <script>
+        // Create twinkling stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars-container');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 2 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Create floating hearts
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.textContent = ['💕', '💖', '💗', '💓'][Math.floor(Math.random() * 4)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.top = '100%';
+            heart.style.animationDuration = (4 + Math.random() * 3) + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 7000);
+        }
+
+        // Initialize
+        createStars();
+
+        // Create floating hearts periodically
+        setInterval(createFloatingHeart, 600);
+
+        // Trigger initial hearts
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createFloatingHeart, i * 300);
+        }
+    </script>
 </body>
 </html>
